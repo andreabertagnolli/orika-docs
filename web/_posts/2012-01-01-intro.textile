@@ -16,14 +16,14 @@ _Please verify the latest version_
 <dependency>
    <groupId>ma.glasnost.orika</groupId>
    <artifactId>orika-core</artifactId>
-   <version>1.3.6</version><!-- or latest version -->
+   <version>1.4.1</version><!-- or latest version -->
 </dependency>
 </pre>
 
 If you do not use maven, please see the [Downloads] section for the latest downloads. Note that Orika has dependencies on the following libraries, for which you'll need to obtain binaries:
-* javassist (v 3.12.0+)
-* slf4j (v 1.5.6+)
-* paranamer (v 2.0+)
+* javassist (v 3.16.1+)
+* slf4j (v 1.6.6+)
+* paranamer (v 2.3+)
 
 h4. Usage
 
