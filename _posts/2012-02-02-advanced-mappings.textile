@@ -131,10 +131,10 @@ We follow this with another pipe <code>|</code> to separate the setter from the 
 Finally, we end the in-line definition with a closing brace <code>}</code>.
 
 <div class="alert alert-info alert-block">
-<h4 class="alert-heading">_In-line property syntax:_</h4>
-<h3>&laquo;name&raquo; *:{* &laquo;getter&raquo;  *|* &laquo;setter&raquo; [ *|* *type=* &laquo;type&raquo; ] *}*</h3>
-<h3>&laquo;name&raquo; *:{* &laquo;getter&raquo; [ *|* *type=* &laquo;type&raquo; ] *}*</h3>
-<h3>&laquo;name&raquo; *:{|* &laquo;setter&raquo; [ *|* *type=* &laquo;type&raquo; ] *}*</h3>
+<h6 class="alert-heading">_In-line property syntax:_</h6>
+<h5>&laquo;name&raquo; *:{* &laquo;getter&raquo;  *|* &laquo;setter&raquo; [ *|* *type=* &laquo;type&raquo; ] *}*</h5>
+<h5>&laquo;name&raquo; *:{* &laquo;getter&raquo; [ *|* *type=* &laquo;type&raquo; ] *}*</h5>
+<h5>&laquo;name&raquo; *:{|* &laquo;setter&raquo; [ *|* *type=* &laquo;type&raquo; ] *}*</h5>
 </div>
 
 So, to bring it together, we can define properties for these elements with the code snippet below. Note that we're defining some properties as nested (separated by the usual *'.'* as separator ).

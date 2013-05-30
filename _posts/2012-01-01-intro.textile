@@ -16,7 +16,7 @@ _Please verify the latest version_
 <dependency>
    <groupId>ma.glasnost.orika</groupId>
    <artifactId>orika-core</artifactId>
-   <version>1.3.6</version><!-- or latest version -->
+   <version>1.4.2</version><!-- or latest version -->
 </dependency>
 </pre>
 
@@ -56,9 +56,11 @@ mapperFactory.classMap(PersonSource.class, PersonDestination.class)
 
 What did we do here? We created a new ClassMapBuilder instance by calling the *classMap* method on mapperFactory, then we used the *field(fieldA, fieldB)* method to specify that the 'firstName' field on _PersonSource_ should be mapped to the 'givenName' field on _PersonDestination_ and likewise for mapping 'lastName' to 'sirName'; then we used the *byDefault()* method to specify that the remaining fields on both classes should be mapped 'byDefault', which maps all fields with matching names from the two classes. Finally, we used the *register()* method to register the mapping with the MapperFactory.
 
-We can get to the specifics of registering mappings <a href="mappings-via-classmapbuilder.html">here</a>, but for now, let's look at obtaining and using the MapperFacade to map some classes, with the basic example below:
+We can get to the specifics of registering mappings <a href="mappings-via-classmapbuilder.html">here</a>, but for now, let's look at obtaining and using the MapperFacade to map some classes, with the basic example in the next section.
 
 h5. Map objects using the MapperFacade
+
+The general pattern of mapping involves use of the *map(objectA, B.class)* method on MapperFacade, which will instantiate a new instance of _B.class_ and map the property values of _objectA_ onto it. A basic example is shown below: 
 
 <pre class="prettyprint linenums">
 MapperFacade mapper = mapperFactory.getMapperFacade();
@@ -71,3 +73,25 @@ PersonDest destination = mapper.map(source, PersonDest.class);
 </pre>
 
 Mappings can also be performed in-place, by using the *map(objectA, objectB)* method on MapperFacade.
+
+h5. Map objects using the BoundMapperFacade
+
+In cases where you have a specific pair of types to map, a _bound_ mapper facade can be used, which generally provides improved performance over use of the standard mapper facade. An example of the _BoundMapperFacade_ is shown below:
+
+<pre class="prettyprint linenums">
+BoundMapperFacade<PersonSource, PersonDest> boundMapper = 
+   mapperFactory.getMapperFacade(PersonSource.class, PersonDest.class);
+
+PersonSource source = new PersonSource();
+// set some field values
+...
+// map the fields of 'source' onto a new instance of PersonDest
+PersonDest destination = boundMapper.map(source);
+</pre>
+
+Mappings can also be performed in-place, by using the *map(objectA, objectB)* method on BoundMapperFacade.
+
+To map in the reverse direction using a bound mapper, use the *mapReverse(objectB)* method.
+For mapping in-place and in the reverse direction, use the *mapReverse(objectB, objectA)* method.
+
+

@@ -9,7 +9,7 @@ h2. Overview
 
 Orika uses a declarative Java-based configuration of mappings from one class to another, whereby you define which fields from one type need to be matched up with which fields from another using a fluent-style API.
 
-For many cases, Orika can properly generate a suitable mapper using just the names of the fields you provide--by investigating their respective types using reflection. If the names of the fields you need to map match, you don't even need to explicitly declare them.
+For many cases, Orika can properly generate a suitable mapper using just the names of the fields you provide--by investigating their respective types using reflection. If the names of the fields you need to map match, you don't even need to explicitly declare them--the *_byDefault()_* method of ClassMapBuilder will match these for you. 
 
 h2. The ClassMapBuilder API
 
@@ -133,7 +133,7 @@ mapperFactory.classMap(BasicPerson.class, BasicPersonDto.class)
 
 h4. Mapping nested fields
 
-Nested properties may be referenced using standard dot '.' notation to separate properites, for example, assume we have the class structure listed below:
+Nested properties may be referenced using standard dot '.' notation to separate properties, for example, assume we have the class structure listed below:
 
 <pre class="prettyprint">
 class Name {
@@ -163,7 +163,7 @@ mapperFactory.classMap(BasicPerson.class, BasicPersonDto.class)
 
 h4. Mapping nested multi-occurrence elements
 
-Nested multi-occurrence elements (of Array, Collection or Map) can also be mapped, by using syntax similar to that used for referencing individual indicies of Arrays, Lists or Maps. Suppose we have the class structure given below:
+Nested multi-occurrence elements (of Array, Collection or Map) can also be mapped, by using syntax similar to that used for referencing individual indices of Arrays, Lists or Maps. Suppose we have the class structure given below:
 
 <pre class="prettyprint">
 class Person {
@@ -179,18 +179,17 @@ class PersonDto {
 }
 
 </pre>
-If we wanted to map the 'names' property from Person into the Map 'names' in PersonDto, with the 'fullName' property as the key, and the Name element as the value, we could accomplish it with the following syntax:
+If we wanted to map the 'names' property from Person into the Map 'personalNames' in PersonDto, with the 'fullName' property (of the Name element) as the key, and the Name element itself as the value, we could accomplish it with the following syntax:
 
 <pre class="prettyprint">
 mapperFactory.classMap(Person.class, PersonDto.class)
-   .field("names{fullName}", "names{key}")
-   .field("names{}", "names{value}")
+   .field("names{fullName}", "personalNames{key}")
+   .field("names{}", "personalNames{value}")
    .register();
 </pre>
   
 A few things to note: 
-* the element of a Map is assumed to be of type Map.Entry, so we can refer to either the 'key' or 'value' property of this element.
-* nested properties are legal within the braces, and so are nested _element_ references, in case the element type itself also contains multi-occurrence fields that you want to map.  
-* the empty field name within the braces ("names{}") is used to refer to the element itself (rather than some property of the element)
+* The element of a Map is assumed to be of type Map.Entry, so we can refer to either the 'key' or 'value' property of this element.
+* Nested properties are legal within the braces, and so are nested _element_ references, in case the element type itself also contains multi-occurrence fields that you want to map.  
+* The empty field name within the braces ("names{}") is used to refer to the element itself (rather than some property of the element).
 
-h4. Mapping ad-hoc properties

@@ -1,0 +1,5 @@
+{
+  "id"    : ".{{ post.url }}",
+  "title"   : "{{ post.title }}",
+  "content" : "{{ post.content | strip_html | downcase | newline_to_br | replace:'<br>',' ' | remove:'"'  }}"
+}

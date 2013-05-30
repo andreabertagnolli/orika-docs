@@ -27,6 +27,9 @@ br {
     padding-top: 0.5em;
 }
 
+input#q {
+	margin-top: 6px;
+}
 /* .navbar, .navbar .nav > li > a, */
 /* .navbar .brand, */
 /* .navbar-inner, */

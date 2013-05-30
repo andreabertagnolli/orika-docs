@@ -7,8 +7,7 @@ desc: explicitly defining conversion from one type to another
 
 h3. Custom Converters
 
-Although Orika has built-in mapping and converters for many cases by default, it may happen that you have a mapping
-use-case which is not supported out of the box. Custom Converters provide one method to resolve this. The simplest way to define your own converter is to extend from <code>ma.glasnost.orika.CustomConverter<A,B></code>, as in the following example:
+Although Orika has built-in mapping and converters for many cases by default, it may happen that you have a mapping use-case which is not supported out of the box. Custom Converters provide one method to resolve this. The simplest way to define your own converter is to extend from <code>ma.glasnost.orika.CustomConverter<A,B></code>, as in the following example:
 
 <pre class="prettyprint">
 public class MyConverter extends CustomConverter<Date,MyDate> {
