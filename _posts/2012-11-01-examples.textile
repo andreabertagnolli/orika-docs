@@ -94,8 +94,8 @@ public class Mapper extends ConfigurableMapper {
     factory.classMap(Person.class, PersonDto.class)
       .field("name.first", "firstName")
       .field("name.last", "lastName")
-      .field("knownAliases[name.first]", "aliases[[0]]")
-      .field("knownAliases[name.last]", "aliases[[1]]")
+      .field("knownAliases{first}", "aliases{[0]}")
+      .field("knownAliases{last}", "aliases{[1]}")
       .byDefault()
       .register();      
   }

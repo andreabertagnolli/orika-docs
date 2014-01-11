@@ -1,0 +1,46 @@
+---
+layout: post
+id: filters
+title: Filters
+desc: customize dynamic mapping behavior
+---
+
+h3. Filters
+
+(_New in Orika 1.4.4_)
+
+Custom mappers, converters and object factories apply custom logic scoped to particular types. There are some cases where you need to inject your own custom logic into the process of mapping one field to another with the ability to control the behavior in a more dynamic fashion. The custom filters feature can help in these cases, allowing you intercept and override the decision to map a particular set of fields, to return a modified copy of the source field before it is mapped, and to modify the destination field after it has been mapped.
+
+Filters instances should implement the <code>ma.glasnost.orika.Filter</code> interface; the <code>ma.glasnost.orika.CustomFilter</code> class may be extended as a base, or the <code>ma.glasnost.orika.NullFilter</code> class may be extended as a working filter which does nothing--allowing you to implement/override only the methods you care about. 
+
+Once you've defined your filter, register it on the *MapperFactory*, like so:
+
+<pre class="prettyprint">
+factory.registerFilter(new MyCustomFilter());
+</pre>
+
+h4. Describe which field mappings are filtered
+
+The *appliesTo(Property source, Property destination)* method is called to determine whether the particular filter should be applied to mapping one property to another. 
+
+h4. Determine if a given field mapping should be performed
+
+The *shouldMap(Type<?> sourceType, String sourceName, Type<?> destType, String destName, MappingContext mappingContext)* method is called to determine whether the mapping should be performed on an individual case-by-case basis. This allows the filter to make a dynamic decision at runtime as to whether the fields should be mapped.
+
+h4. Return a modified copy of the source to be mapped
+
+The *filtersSource()* method is consulted at mapper generation time to determine whether a particular filter should be called with an option to filter the destination instance.
+
+The *filterSource(S sourceValue, Type&lt;S> sourceType, String sourceName, Type<?> destType, String destName, MappingContext mappingContext)* method is used to optionally return a modified instance of the source field before it is passed to the mapping logic.
+
+h4. Modify the destination after mappping
+
+The *filtersDestination()* method is consulted at mapper generation time to determine whether a particular filter should be called with an option to filter the destination instance.
+
+The *filterDestination(D destinationValue, Type<?> sourceType, String sourceName, Type<D> destType, String destName, MappingContext mappingContext)* method is used to optionally modify the destination instance after it has been passed through the mapping logic.
+
+
+
+
+
+
