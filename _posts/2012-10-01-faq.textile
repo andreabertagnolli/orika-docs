@@ -7,7 +7,7 @@ desc: frequently asked questions
 
 h3. Should I write unit tests to confirm that Orika mapped my objects successfully
 
-Of course! If you mapped these objects by hand, you would write a unit test, right? So you're just going to trust us that we mapped your objects the way you expected us to? That's giving Orika and it's authors a little too much credit. Please write tests to confirm the objects are mapped as you expect.
+Of course! If you mapped these objects by hand, you would write a unit test, right? So you're just going to trust us that we mapped your objects the way you expected us to? That's giving Orika and its authors a little too much credit. Please write tests to confirm the objects are mapped as you expect.
 
 h3. What types of data objects are supported
 
@@ -24,7 +24,7 @@ Additionally, it is straightforward to register a custom mapper (by `extending m
 h3. How does Orika handle immutable types
 
 Orika has a base set of types which it treats as immutable, i.e., that are copied by reference from the source to the destination. Specifically, that list includes all of the primitive types and their corresponding wrapper classes, String, BigDecimal, etc.
-User-defind/declared immutable types are possible via the registration of a special Converter (PassThroughConverter).
+User-defined/declared immutable types are possible via the registration of a special Converter (PassThroughConverter).
 
 h3. Does Orika automatically map fields with the same property name
 
@@ -32,7 +32,7 @@ Yes; when a mapping is requested for 2 types which have not been explicitly regi
 
 h3. Is the default mapping behavior configurable
 
-Yes. Any number of DefaultFieldMapper instances can be defined/registered which are consulted for a default mapping, in the case where a matching field could not be found for a given property. Additionally, the default mapping behavior can be completely customized by extending ClassMapBuilder (see issue#33).
+Yes. Any number of DefaultFieldMapper instances can be defined/registered which are consulted for a default mapping, in the case where a matching field could not be found for a given property. Additionally, the default mapping behavior can be completely customized by extending ClassMapBuilder (see [issue 33](https://code.google.com/p/orika/issues/detail?id=33)).
 
 
 h3. Will Orika map recursively
@@ -64,7 +64,7 @@ Yes. Orika has support for the registration of a "concrete" type for a given abs
 
 h3. How is Orika mapping configured
 
-Orika mapping is configured via Java code at runtime, via a fluent-style ClassMapBuilder API. An instance is obtained from a MapperFactory which is then used to describe the mapping from one type to antoher. Finally, the specified ClassMap is registered with the MapperFactory for later use in generating a byte-code mapper.
+Orika mapping is configured via Java code at runtime, via a fluent-style ClassMapBuilder API. An instance is obtained from a MapperFactory which is then used to describe the mapping from one type to another. Finally, the specified ClassMap is registered with the MapperFactory for later use in generating a byte-code mapper.
 The recommended way to configure orika is by extending `ma.glasnost.orika.impl.ConfigurableMapper`, and providing any necessary customizations/configurations in the `configure` and `configureFactoryBuilder` methods; an instance of that custom mapper can then be safely shared as a singleton.
 
 h3. Can Orika be used with Spring
@@ -105,7 +105,7 @@ Yes.
 </dependency>
 </pre>
              
-h3. Can I map an object contained in a collection or map to a field, or vise-versa
+h3. Can I map an object contained in a collection or map to a field, or vice-versa
 
 Yes. (as of version 1.3.0)
 For a Bean to Map, simply define your class-map as normal using the <code>mapperFactory.classMap(...)</code> method, passing one of the types as a <code>Class<?></code> (or <code>Type<?></code>) which is assignable to <code>java.util.Map</code>. The field-names on the Map side of the equation will be used as the Map keys.
