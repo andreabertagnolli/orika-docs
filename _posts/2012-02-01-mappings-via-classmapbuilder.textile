@@ -172,7 +172,7 @@ class Person {
 }
 
 class PersonDto { 
-  private Map<String, Name> names;
+  private Map<String, Name> personalNames;
   private String[] firstNames;
   private List<String> lastNames;
   // getters/setters omitted
@@ -192,4 +192,3 @@ A few things to note:
 * The element of a Map is assumed to be of type Map.Entry, so we can refer to either the 'key' or 'value' property of this element.
 * Nested properties are legal within the braces, and so are nested _element_ references, in case the element type itself also contains multi-occurrence fields that you want to map.  
 * The empty field name within the braces ("names{}") is used to refer to the element itself (rather than some property of the element).
-
