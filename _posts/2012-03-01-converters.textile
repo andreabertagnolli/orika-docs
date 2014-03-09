@@ -30,7 +30,7 @@ public class MyConverter extends BidirectionalConverter<Date,MyDate> {
       // convert in one direction
    }
 
-   public Date convertFrom(Timestamp source, Type<Date> destinationType) {
+   public Date convertFrom(MyDate source, Type<Date> destinationType) {
       // convert in the other direction
    }
 }
