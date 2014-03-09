@@ -17,7 +17,7 @@ public class PersonFactory implements ObjectFactory<Person> {
       Person person = new Person();
       // set the default address
       person.setAdress(new Address("Morocco", "Casablanca"));
-            return personDto;
+      return person;
    }
 }
 </pre>
