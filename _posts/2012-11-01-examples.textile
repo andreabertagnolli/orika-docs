@@ -64,8 +64,8 @@ public class PersonDto {
   public Date getBirthDate() {
     return birthDate;
   }
-  public String[] getAliases() {
-    return knownAliases;
+  public String[][] getAliases() {
+    return aliases;
   }
   public void setFirstName(String firstName) {
     this.firstName = firstName;
@@ -83,7 +83,7 @@ public class PersonDto {
 </pre>
 <br>
 
-Let's assume that we'd like to map _Person_ to _PersonDto_ (and vise-versa); there are a few interesting points about these two classes. First, _Person_ has a 'name' property which is of type _Name_, while _PersonDto_ contains the name data in two string fields 'firstName' and 'lastName'. 
+Let's assume that we'd like to map _Person_ to _PersonDto_ (and vice-versa); there are a few interesting points about these two classes. First, _Person_ has a 'name' property which is of type _Name_, while _PersonDto_ contains the name data in two string fields 'firstName' and 'lastName'. 
 Also, the 'knownAliases' property of _Person_ is actually stored in a multi-dimensional array in _PersonDto_, with the first name in index 0 of the second dimension, and the last name in index 1 of the second dimension.
 
 Below, we'll demonstrate how to configure Orika to map these classes; we'll use our own custom extension of _ConfigurableMapper_, like so:
