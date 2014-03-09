@@ -166,6 +166,13 @@ h4. Mapping nested multi-occurrence elements
 Nested multi-occurrence elements (of Array, Collection or Map) can also be mapped, by using syntax similar to that used for referencing individual indices of Arrays, Lists or Maps. Suppose we have the class structure given below:
 
 <pre class="prettyprint">
+class Name {
+   private String first;
+   private String last;
+   private String fullName;
+   // getters/setters 
+}
+
 class Person {
    private List<Name> names;
    // getters/setters 
@@ -192,4 +199,3 @@ A few things to note:
 * The element of a Map is assumed to be of type Map.Entry, so we can refer to either the 'key' or 'value' property of this element.
 * Nested properties are legal within the braces, and so are nested _element_ references, in case the element type itself also contains multi-occurrence fields that you want to map.  
 * The empty field name within the braces ("names{}") is used to refer to the element itself (rather than some property of the element).
-
