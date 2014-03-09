@@ -22,23 +22,23 @@ If you're primarily concerned with the mapping of a particular type to another, 
 <pre class="prettyprint">
 BoundMapperFacade<Person,PersonDto> mapper = mapperFactory.getMapperFacade(Person.class, PersonDto.class);
 
-public toDto(Person person) {
+public PersonDto toDto(Person person) {
    return mapper.map(person);
 }
 </pre>
 
-_Note that Orika makes use of BoundMapperFacade within it's generated Mapper and ObjectFactory code to avoid extra lookups on recursive mapping calls._
+_Note that Orika makes use of BoundMapperFacade within its generated Mapper and ObjectFactory code to avoid extra lookups on recursive mapping calls._
 
 h4. Use a custom BoundMapperFacade when your object graph has no cycles
 
-One of the most expensive portions of the mapping process is the hash lookup within a given MappingContext for an object that has already been mapped; this is necessary to avoid infinite recursion in those cases where your object graph has cycles (e.g., parent references it's child, which references it's parent).
+One of the most expensive portions of the mapping process is the hash lookup within a given MappingContext for an object that has already been mapped; this is necessary to avoid infinite recursion in those cases where your object graph has cycles (e.g., parent references its child, which references its parent).
 
 In the case where you know there are no cycles in the object graph, you can significantly speed up the mapping process by avoiding this lookup. To construct a non-cyclic verson of BoundMapperFacade, use the *getMapperFacade(typeA, TypeB, false)* method on MapperFactory (the third argument is a boolean, specifying whether the object graph contains cycles), like so:
 
 <pre class="prettyprint">
 BoundMapperFacade<Person,PersonDto> mapper = mapperFactory.getMapperFacade(Person.class, PersonDto.class, false);
 
-public toDto(Person person) {
+public PersonDto toDto(Person person) {
    return mapper.map(person);
 }
 </pre>
