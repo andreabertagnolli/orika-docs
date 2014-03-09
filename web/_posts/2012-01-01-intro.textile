@@ -49,12 +49,12 @@ Assuming that you have some fields of some types that you'd like to map which do
 <pre class="prettyprint linenums">
 mapperFactory.classMap(PersonSource.class, PersonDestination.class)
    .field("firstName", "givenName")
-   .field("lastName", "sirName")
+   .field("lastName", "surName")
    .byDefault()
    .register();
 </pre>
 
-What did we do here? We created a new ClassMapBuilder instance by calling the *classMap* method on mapperFactory, then we used the *field(fieldA, fieldB)* method to specify that the 'firstName' field on _PersonSource_ should be mapped to the 'givenName' field on _PersonDestination_ and likewise for mapping 'lastName' to 'sirName'; then we used the *byDefault()* method to specify that the remaining fields on both classes should be mapped 'byDefault', which maps all fields with matching names from the two classes. Finally, we used the *register()* method to register the mapping with the MapperFactory.
+What did we do here? We created a new ClassMapBuilder instance by calling the *classMap* method on mapperFactory, then we used the *field(fieldA, fieldB)* method to specify that the 'firstName' field on _PersonSource_ should be mapped to the 'givenName' field on _PersonDestination_ and likewise for mapping 'lastName' to 'surName'; then we used the *byDefault()* method to specify that the remaining fields on both classes should be mapped 'byDefault', which maps all fields with matching names from the two classes. Finally, we used the *register()* method to register the mapping with the MapperFactory.
 
 We can get to the specifics of registering mappings <a href="mappings-via-classmapbuilder.html">here</a>, but for now, let's look at obtaining and using the MapperFacade to map some classes, with the basic example below:
 
