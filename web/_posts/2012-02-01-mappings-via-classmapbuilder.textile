@@ -22,7 +22,7 @@ class BasicPerson {
   private Date birthDate;
   // getters/setters omitted
 }
-class BasicPersonDto { 
+class BasicPersonDto {
   private String fullName;
   private int currentAge;
   private Date birthDate;
@@ -81,7 +81,7 @@ _This would exclude the 'name' field from mapping._
 
 h4. Specifying a particular constructor to use
 
-Orika will attempt to find a best-fit match when choosing which constructor to use for instantiating the mapped types. To explicitly specify that Orika should use one particular constructor, use the *constructorA(parameterNames...)* and *constructorB(parameterNames...)*, as shown below; the *constructorA* method is used to specify a constructor for the 'left' side of the mapping, and *constructorB* is used to specify a constructor for the 'right' side. 
+Orika will attempt to find a best-fit match when choosing which constructor to use for instantiating the mapped types. To explicitly specify that Orika should use one particular constructor, use the *constructorA(parameterNames...)* and *constructorB(parameterNames...)*, as shown below; the *constructorA* method is used to specify a constructor for the 'left' side of the mapping, and *constructorB* is used to specify a constructor for the 'right' side.
 
 In this example, we specify that the constructor with parameters { "name", "id" } should be used to instantiate instances of _BasicPerson_:
 
@@ -102,7 +102,7 @@ class BasicPerson {
   private List<String> nameParts;
   // getters/setters omitted
 }
-class BasicPersonDto { 
+class BasicPersonDto {
   private String firstName;
   private String lastName;
   // getters/setters omitted
@@ -110,7 +110,7 @@ class BasicPersonDto {
 </pre>
 
 We could map the first element of BasicPerson's 'nameParts' to BasicPersonDto's 'firstName' property, and the second element to 'lastName', like so:
- 
+
 <pre class="prettyprint">
 mapperFactory.classMap(BasicPerson.class, BasicPersonDto.class)
    .field("nameParts[0]", "firstName")
@@ -140,14 +140,14 @@ class Name {
    private String first;
    private String last;
    private String fullName;
-   // getters/setters 
+   // getters/setters
 }
 
 class BasicPerson {
   private Name name;
   // getters/setters omitted
 }
-class BasicPersonDto { 
+class BasicPersonDto {
   private String firstName;
   // getters/setters omitted
 }
@@ -161,6 +161,37 @@ mapperFactory.classMap(BasicPerson.class, BasicPersonDto.class)
    .register();
 </pre>
 
+Nested fields can also be mapped by default, if the names of the fields match:
+
+<pre class="prettyprint">
+class Name {
+   private String first;
+   private String last;
+   private String fullName;
+   // getters/setters
+}
+
+class BasicPerson {
+  private Name name;
+  private String address;
+  // getters/setters omitted
+}
+class BasicPersonDto {
+  private String first;
+  private String last;
+  private String fullName;
+  private String address;
+  // getters/setters omitted
+}
+</pre>
+
+<pre class="prettyprint">
+mapperFactory.classMap(BasicPerson.class, BasicPersonDto.class)
+   .field("name", "")
+   .byDefault()
+   .register();
+</pre>
+
 h4. Mapping nested multi-occurrence elements
 
 Nested multi-occurrence elements (of Array, Collection or Map) can also be mapped, by using syntax similar to that used for referencing individual indicies of Arrays, Lists or Maps. Suppose we have the class structure given below:
@@ -168,10 +199,10 @@ Nested multi-occurrence elements (of Array, Collection or Map) can also be mappe
 <pre class="prettyprint">
 class Person {
    private List<Name> names;
-   // getters/setters 
+   // getters/setters
 }
 
-class PersonDto { 
+class PersonDto {
   private Map<String, Name> names;
   private String[] firstNames;
   private List<String> lastNames;
@@ -187,10 +218,10 @@ mapperFactory.classMap(Person.class, PersonDto.class)
    .field("names{}", "names{value}")
    .register();
 </pre>
-  
-A few things to note: 
+
+A few things to note:
 * the element of a Map is assumed to be of type Map.Entry, so we can refer to either the 'key' or 'value' property of this element.
-* nested properties are legal within the braces, and so are nested _element_ references, in case the element type itself also contains multi-occurrence fields that you want to map.  
+* nested properties are legal within the braces, and so are nested _element_ references, in case the element type itself also contains multi-occurrence fields that you want to map.
 * the empty field name within the braces ("names{}") is used to refer to the element itself (rather than some property of the element)
 
 h4. Mapping ad-hoc properties
