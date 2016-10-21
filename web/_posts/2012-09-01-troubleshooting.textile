@@ -21,7 +21,7 @@ h5. When a class-map is created (either by registration, or by default at runtim
 h5. When a Mapper is generated to handle a particular class-map:
 
 <pre>
-08:56:01.928 [main] DEBUG m.g.o.impl.generator.MapperGenerator - Generating new mapper for (BookImpl, BookDTOWithAltCaseEnum)	
+08:56:01.928 [main] DEBUG m.g.o.impl.generator.MapperGenerator - Generating new mapper for (BookImpl, BookDTOWithAltCaseEnum)
    OrikaBookDTOWithAltCaseEnumBookImplMapper892899908.mapAToB(BookImpl, BookDTOWithAltCaseEnum) {
     Field(format(PublicationFormat), format(PublicationFormatDTOAltCase)) : using converter LegacyConverter(ma.glasnost.orika.test.enums.EnumsTestCase$1@150ac9a8)
     Field(title(String), title(String)) : treating as immutable (using copy-by-reference)
@@ -30,7 +30,7 @@ h5. When a Mapper is generated to handle a particular class-map:
     Field(format(PublicationFormatDTOAltCase), format(PublicationFormat)) : mapping from String or enum to enum
     Field(title(String), title(String)) : treating as immutable (using copy-by-reference)
    }
-   Types used: [PublicationFormatDTOAltCase]         
+   Types used: [PublicationFormatDTOAltCase]
    Converters used: LegacyConverter(ma.glasnost.orika.test.enums.EnumsTestCase$1@150ac9a8)]
 </pre>
 
@@ -38,8 +38,8 @@ h5. When a mapping strategy is resolved to handle a particular pair of types:
 
 <pre>
  08:56:01.929 [main] DEBUG m.g.orika.impl.MapperFacadeImpl - MappingStrategy resolved and cached:
-       Inputs:[ sourceClass: ma.glasnost.orika.test.enums.EnumsTestCaseClasses.BookImpl, sourceType: BookImpl, destinationType: BookDTOWithAltCaseEnum]     
-       Resolved:[ strategy: InstantiateByDefaultAndUseCustomMapperStrategy, sourceType: BookImpl, destinationType: BookDTOWithAltCaseEnum, mapper: ma.glasnost.orika.generated.OrikaBookDTOWithAltCaseEnumBookImplMapper892899908@560c7816, mapInverse?: false] 
+       Inputs:[ sourceClass: ma.glasnost.orika.test.enums.EnumsTestCaseClasses.BookImpl, sourceType: BookImpl, destinationType: BookDTOWithAltCaseEnum]
+       Resolved:[ strategy: InstantiateByDefaultAndUseCustomMapperStrategy, sourceType: BookImpl, destinationType: BookDTOWithAltCaseEnum, mapper: ma.glasnost.orika.generated.OrikaBookDTOWithAltCaseEnumBookImplMapper892899908@560c7816, mapInverse?: false]
 </pre>
 
 _Orika uses *slf4j*, so it should be able to support most logging implementations using the proper bridge._
@@ -55,7 +55,7 @@ To enable step-through debugging into the generated objects (which Orika is buil
    <groupId>ma.glasnost.orika</groupId>
    <artifactId>orika-eclipse-tools</artifactId>
    <version>1.4.0</version><!-- please verify the latest version -->
-</dependency> 
+</dependency>
 </pre>
 
 In addition, you'll also need to tell Orika you want to use Eclipse Jdt as the compiler strategy; there are 2 ways to do this, listed in order of precedence:
@@ -63,11 +63,11 @@ In addition, you'll also need to tell Orika you want to use Eclipse Jdt as the c
 * Use the <code>DefaultMapperFactory.Builder.compilerStrategy(...)</code> method, like so:
 
 <pre class="prettyprint">
-MapperFactory factory = 
+MapperFactory factory =
         new DefaultMapperFactory.Builder()
                 .compilerStrategy(new EclipseJdtCompilerStrategy())
                 .build();
-// add mappers, hints, converters, etc...     
+// add mappers, hints, converters, etc...
 </pre>
 
 * Set the system property
@@ -81,7 +81,9 @@ h5. _Edit Source Lookup Path._
 
 If you're using Eclipse as your IDE, you may initially receive the *"Source not found"* window with a button labeled *"Edit Source Lookup Path..."* while trying to (debug) step into the source of a generated object. When you click this button, you'll need to add the location of the compiler output folder for your project as a *File System Folder* (not a Workspace Folder). This is due to the fact that source files will not actually exist until just before you reach the break-point and Eclipse will have a "stale" view of the workspace folder by that time.
 
-If you're using an IDE other than Eclipse, the procedure should be similar. Note that although Orika is leveraging the Eclipse Jdt core functions to format and compile the code, it resolves these from it's own dependencies, so if using Maven, there should be few differences.
+If you're using IDEA Intellij as your IDE, you have to open the "Project structure..." menu, add a Java library and point to the generated folder.
+
+If you're using any other IDE, the procedure should be similar. Note that although Orika is leveraging the Eclipse Jdt core functions to format and compile the code, it resolves these from it's own dependencies, so if using Maven, there should be few differences.
 
 If your project follows the Maven folder structure, this folder would be the target/test-classes folder by default. Check your project configuration build path to see the target location if you're unsure.
 
@@ -90,7 +92,7 @@ h5. _Not using Maven?_
 If not using Maven, you'll need to make sure the following Eclipse Jdt artifacts are added to the build path:
 
 <table class="table table-bordered table-striped">
-	
+
 <thead>
 	<tr><th>jdt artifact</th><th>version</th></tr>
 </thead>
@@ -132,4 +134,3 @@ Note that when using Javassist, the debug info is not being generated so you can
 You may also need to apply the auto-formatting feature of your favorite IDE to the Javassist strategy source as we're not really shooting for style points on these (normally in-memory only) classes.
 
 The Eclipse strategy generated files includes auto-formatting of the source and includes debug info so that you can step into the code during a debug session (as mentioned in the section above).
-
