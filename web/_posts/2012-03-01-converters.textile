@@ -12,7 +12,7 @@ use-case which is not supported out of the box. Custom Converters provide one me
 
 <pre class="prettyprint">
 public class MyConverter extends CustomConverter<Date,MyDate> {
-   public MyDate convert(Date source, Type<? extends MyDate> destinationType) {
+   public MyDate convert(Date source, Type<? extends MyDate> destinationType, MappingContext mappingContext) {
       // return a new instance of destinationType with all properties filled
    }
 }
@@ -46,7 +46,7 @@ ConverterFactory converterFactory = mapperFactory.getConverterFactory();
 converterFactory.registerConverter(new MyConverter());
 </pre>
 
-Converters registered at a *global level* will be eligible to be used whenever the source and destination types are compatible with the types defined by the converter. 
+Converters registered at a *global level* will be eligible to be used whenever the source and destination types are compatible with the types defined by the converter.
 A more technical description of the process to determine whether a converter will be used is as follows:
 # Converters are ordered so that the more specific (in terms of class hierarchy) are tested before the more generic.
 # The first in this ordering which answers <code>true</code> to the <code>canConvert(Type<?> sourceType, Type<?> destinationType)</code> method will be used to convert the types
